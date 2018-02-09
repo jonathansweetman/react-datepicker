@@ -103,6 +103,7 @@ export default class Calendar extends React.Component {
     setOpen: PropTypes.func,
     useShortMonthInDropdown: PropTypes.bool,
     showDisabledMonthNavigation: PropTypes.bool,
+    onClearClick: PropTypes.func
   };
 
   static get defaultProps() {
@@ -229,6 +230,19 @@ export default class Calendar extends React.Component {
   handleMonthYearChange = date => {
     this.handleYearChange(date)
     this.handleMonthChange(date)
+  };
+
+  handleOnClear = e => {
+    if (event) {
+      if (event.preventDefault) {
+        event.preventDefault()
+      }
+      if (event.stopPropagation()) {
+        event.stopPropagation()
+      }
+    }
+    this.props.onClearClick(e);
+    this.props.setOpen(false);
   };
 
   changeYear = year => {
@@ -488,6 +502,7 @@ export default class Calendar extends React.Component {
             endDate={this.props.endDate}
             peekNextMonth={this.props.peekNextMonth}
             utcOffset={this.props.utcOffset}/>
+            <button onClick={this.handleOnClear} className="js-react-datepicker__clear">CLEAR</button>
         </div>
       );
     }

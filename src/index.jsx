@@ -81,6 +81,7 @@ export default class DatePicker extends React.Component {
     onBlur: PropTypes.func,
     onChange: PropTypes.func.isRequired,
     onSelect: PropTypes.func,
+    onClose: PropTypes.func,
     onWeekSelect: PropTypes.func,
     onClickOutside: PropTypes.func,
     onChangeRaw: PropTypes.func,
@@ -161,6 +162,7 @@ export default class DatePicker extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // if (typeof nextProps.selected === 'string') return;
     const currentMonth = this.props.selected && getMonth(this.props.selected);
     const nextMonth = nextProps.selected && getMonth(nextProps.selected);
     if (this.props.inline && currentMonth !== nextMonth) {
@@ -216,11 +218,16 @@ export default class DatePicker extends React.Component {
 
   setFocus = () => {
     if (this.input.focus) {
-      this.input.focus();
+      // JS: I commented this out because I don't want to focus the input after selecting a date, this way blur occurs
+      // and iPhone can reselect.
+      // this.input.focus();
     }
   };
 
   setOpen = open => {
+    if (this.props.onClose && open === false) {
+      this.props.onClose();
+    }
     this.setState({
       open: open,
       preSelection:
@@ -300,6 +307,7 @@ export default class DatePicker extends React.Component {
       this.setPreSelection(date);
     } else if (!this.props.inline) {
       this.setOpen(false);
+      this.input.blur();
     }
   };
 
@@ -326,7 +334,7 @@ export default class DatePicker extends React.Component {
           preSelection: changedDate
         });
       }
-      this.props.onChange(changedDate, event);
+      this.props.onChange(changedDate, event, this.input);
     }
 
     this.props.onSelect(changedDate, event);
@@ -371,6 +379,27 @@ export default class DatePicker extends React.Component {
   onInputClick = () => {
     if (!this.props.disabled) {
       this.setOpen(true);
+    }
+  };
+
+  onKeyPress = (e) => {
+    const regex = /[^0-9]/;
+    if (e.key === '/') {
+
+    } else if (regex.test(e.key)) {
+        e.preventDefault();
+    }
+  };
+
+  onPaste = (e) => {
+    const regex = /[^0-9/]/;
+    try {
+        const string = e.clipboardData.getData('Text');
+        if (regex.test(string)) {
+            e.preventDefault();
+            if (this.props.onChange) this.props.onChange(e.target.value, this.props.validationRules);
+        }
+    } catch(e) {
     }
   };
 
@@ -453,7 +482,7 @@ export default class DatePicker extends React.Component {
   			event.preventDefault()
   		}
   	}
-  	this.props.onChange(null, event)
+  	this.props.onChange(null, event, this.input)
   	this.setState({ inputValue: null })
   };
 
@@ -524,7 +553,9 @@ export default class DatePicker extends React.Component {
         maxTime={this.props.maxTime}
         excludeTimes={this.props.excludeTimes}
         className={this.props.calendarClassName}
-        yearDropdownItemNumber={this.props.yearDropdownItemNumber}>
+        yearDropdownItemNumber={this.props.yearDropdownItemNumber}
+        onClearClick={this.onClearClick}
+      >
         {this.props.children}
       </WrappedCalendar>
     );
@@ -544,6 +575,7 @@ export default class DatePicker extends React.Component {
           ? this.state.inputValue
           : safeDateFormat(this.props.selected, this.props);
 
+
     return React.cloneElement(customInput, {
       [customInputRef]: input => {
         this.input = input;
@@ -554,6 +586,8 @@ export default class DatePicker extends React.Component {
       onClick: this.onInputClick,
       onFocus: this.handleFocus,
       onKeyDown: this.onInputKeyDown,
+      onKeyPress: this.onKeyPress,
+      onPaste: this.onPaste,
       id: this.props.id,
       name: this.props.name,
       autoFocus: this.props.autoFocus,

@@ -168,7 +168,7 @@
 }
 
 .react-datepicker__month {
-  margin: $datepicker__margin;
+  margin: $datepicker__margin $datepicker__margin 0 $datepicker__margin;
   text-align: center;
 }
 
@@ -498,6 +498,15 @@
     }
   }
 
+  @media (max-width: 400px), (max-height: 400px) {
+    .react-datepicker__day-name,
+    .react-datepicker__day,
+    .react-datepicker__time-name {
+      width: 1.5rem;
+      line-height: 1.5rem;
+    }
+  }
+
   .react-datepicker__current-month,
   .react-datepicker-time__header {
     font-size: $datepicker__font-size * 1.8;
@@ -529,9 +538,30 @@
     }
 
     &--disabled,
-     &--disabled:hover {
-       border-left-color: $datepicker__navigation-disabled-color;
-       cursor: default;
-     }
+    &--disabled:hover {
+      border-left-color: $datepicker__navigation-disabled-color;
+      cursor: default;
+    }
+  }
+}
+
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+  margin-right: 4px !important;
+}
+
+.react-datepicker__month-dropdown-container {
+  margin-right: 1rem;
+}
+// Resize for small screens
+@media (max-width: 400px), (max-height: 550px) {
+  .react-datepicker__month-dropdown-container {
+    margin-right: 0.75rem;
+  }
+}
+
+@media (max-width: 400px), (max-height: 400px) {
+  .react-datepicker__month-dropdown-container {
+    margin-right: 0.5rem;
   }
 }

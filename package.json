@@ -1,10 +1,11 @@
 {
-  "author": "HackerOne",
-  "name": "react-datepicker",
-  "description": "A simple and reusable datepicker component for React",
-  "version": "1.1.0",
+  "author": "Jonathan Sweetman",
+  "name": "jsweetman-react-datepicker",
+  "description":
+    "A simple and reusable datepicker component for React, forked from https://github.com/Hacker0x01/react-datepicker",
+  "version": "1.0.0",
   "license": "MIT",
-  "homepage": "https://github.com/Hacker0x01/react-datepicker",
+  "homepage": "https://github.com/jonathansweetman/react-datepicker",
   "main": "lib",
   "module": "es",
   "unpkg": "dist/react-datepicker.min.js",
@@ -13,10 +14,10 @@
   "keywords": ["react", "datepicker", "calendar", "date", "react-component"],
   "repository": {
     "type": "git",
-    "url": "git://github.com/Hacker0x01/react-datepicker.git"
+    "url": "git://github.com/jonathansweetman/react-datepicker.git"
   },
   "bugs": {
-    "url": "https://github.com/Hacker0x01/react-datepicker/issues"
+    "url": "https://github.com/jonathansweetman/react-datepicker/issues"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
