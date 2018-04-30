@@ -538,7 +538,6 @@ export default class Calendar extends React.Component {
   };
 
   render() {
-    console.log('rendering calendar');
     return (
       <div className={classnames("react-datepicker", this.props.className)}>
         <div className="react-datepicker__triangle" />
