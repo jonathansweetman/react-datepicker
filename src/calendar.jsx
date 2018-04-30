@@ -103,7 +103,8 @@ export default class Calendar extends React.Component {
     setOpen: PropTypes.func,
     useShortMonthInDropdown: PropTypes.bool,
     showDisabledMonthNavigation: PropTypes.bool,
-    onClearClick: PropTypes.func
+    onClearClick: PropTypes.func,
+    selectArrow: PropTypes.any.isRequired
   };
 
   static get defaultProps() {
@@ -397,7 +398,9 @@ export default class Calendar extends React.Component {
         maxDate={this.props.maxDate}
         year={getYear(this.state.date)}
         scrollableYearDropdown={this.props.scrollableYearDropdown}
-        yearDropdownItemNumber={this.props.yearDropdownItemNumber}/>
+        yearDropdownItemNumber={this.props.yearDropdownItemNumber}
+        selectArrow={this.props.selectArrow}
+      />
     );
   };
 
@@ -412,7 +415,9 @@ export default class Calendar extends React.Component {
         dateFormat={this.props.dateFormat}
         onChange={this.changeMonth}
         month={getMonth(this.state.date)}
-        useShortMonthInDropdown={this.props.useShortMonthInDropdown} />
+        useShortMonthInDropdown={this.props.useShortMonthInDropdown}
+        selectArrow={this.props.selectArrow}
+      />
     );
   };
 
@@ -430,6 +435,7 @@ export default class Calendar extends React.Component {
         maxDate={this.props.maxDate}
         date={this.state.date}
         scrollableMonthYearDropdown={this.props.scrollableMonthYearDropdown}
+        selectArrow={this.props.selectArrow}
       />
     );
   };
@@ -532,6 +538,7 @@ export default class Calendar extends React.Component {
   };
 
   render() {
+    console.log('rendering calendar');
     return (
       <div className={classnames("react-datepicker", this.props.className)}>
         <div className="react-datepicker__triangle" />

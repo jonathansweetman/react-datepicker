@@ -25,12 +25,13 @@ export default class MonthYearDropdown extends React.Component {
     minDate: PropTypes.object.isRequired,
     date: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
-    scrollableMonthYearDropdown: PropTypes.bool
-  }
+    scrollableMonthYearDropdown: PropTypes.bool,
+    selectArrow: PropTypes.any.isRequired
+  };
 
   state = {
     dropdownVisible: false
-  }
+  };
 
   renderSelectOptions = () => {
     const currDate = getStartOfMonth(localizeDate(this.props.minDate, this.props.locale))
@@ -129,6 +130,7 @@ export default class MonthYearDropdown extends React.Component {
       <div
         className={`react-datepicker__month-year-dropdown-container react-datepicker__month-year-dropdown-container--${this.props.dropdownMode}`}>
         {renderedDropdown}
+        {this.props.selectArrow}
       </div>
     )
   }

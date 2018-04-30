@@ -13,7 +13,8 @@ export default class MonthDropdown extends React.Component {
     dateFormat: PropTypes.string.isRequired,
     month: PropTypes.number.isRequired,
     onChange: PropTypes.func.isRequired,
-    useShortMonthInDropdown: PropTypes.bool
+    useShortMonthInDropdown: PropTypes.bool,
+    selectArrow: PropTypes.any.isRequired
   };
 
   state = {
@@ -104,6 +105,7 @@ export default class MonthDropdown extends React.Component {
           this.props.dropdownMode
         }`}>
         {renderedDropdown}
+        {this.props.selectArrow}
       </div>
     );
   }

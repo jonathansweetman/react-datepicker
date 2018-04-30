@@ -18,7 +18,8 @@ export default class YearDropdown extends React.Component {
     yearDropdownItemNumber: PropTypes.number,
     date: PropTypes.object,
     onSelect: PropTypes.func,
-    setOpen: PropTypes.func
+    setOpen: PropTypes.func,
+    selectArrow: PropTypes.any.isRequired
   };
 
   state = {
@@ -141,6 +142,7 @@ export default class YearDropdown extends React.Component {
           this.props.dropdownMode
         }`}>
         {renderedDropdown}
+        {this.props.selectArrow}
       </div>
     );
   }
