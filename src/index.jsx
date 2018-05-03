@@ -129,7 +129,8 @@ export default class DatePicker extends React.Component {
     maxTime: PropTypes.object,
     excludeTimes: PropTypes.array,
     useShortMonthInDropdown: PropTypes.bool,
-    selectArrow: PropTypes.any.isRequired
+    selectArrow: PropTypes.any.isRequired,
+    hideClear: PropTypes.bool
   };
 
   static get defaultProps() {
@@ -557,6 +558,7 @@ export default class DatePicker extends React.Component {
         yearDropdownItemNumber={this.props.yearDropdownItemNumber}
         selectArrow={this.props.selectArrow}
         onClearClick={this.onClearClick}
+        hideClear={this.props.hideClear}
       >
         {this.props.children}
       </WrappedCalendar>

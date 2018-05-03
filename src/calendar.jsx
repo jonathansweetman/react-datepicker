@@ -104,6 +104,7 @@ export default class Calendar extends React.Component {
     useShortMonthInDropdown: PropTypes.bool,
     showDisabledMonthNavigation: PropTypes.bool,
     onClearClick: PropTypes.func,
+    hideClear: PropTypes.bool,
     selectArrow: PropTypes.any.isRequired
   };
 
@@ -508,7 +509,7 @@ export default class Calendar extends React.Component {
             endDate={this.props.endDate}
             peekNextMonth={this.props.peekNextMonth}
             utcOffset={this.props.utcOffset}/>
-            <button onClick={this.handleOnClear} className="js-react-datepicker__clear">CLEAR</button>
+            {!this.props.hideClear && <button onClick={this.handleOnClear} className="js-react-datepicker__clear">CLEAR</button>}
         </div>
       );
     }
